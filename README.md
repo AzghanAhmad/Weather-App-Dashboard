@@ -1,4 +1,6 @@
-****Weather App****
+
+                                                                              ****Weather App****
+
 **Overview**
 The Weather App is a web application that allows users to check the weather forecast for a specific city. Users can interact with a chatbot for weather queries, and the app displays detailed weather information in a user-friendly dashboard. It leverages the OpenWeather API to fetch real-time weather data and includes pagination for displaying forecast data.
 
