@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <link rel="icon" type="image/x-icon" href="/images/Weathericon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-sky-900 to-gray-600">
+
+  <div class="flex">
+    <aside class="w-64 bg-gray-800 h-auto">
+      <div class="p-8">
+        <h1 class="text-white text-2xl font-bold mb-4">
+          <video autoplay loop muted class="w-30 h-30 inline-block" src="images/newlogo.mp4"></video>
+        </h1>
+        <nav>
+          <a href="Dashboard.html" class="block text-white py-2">Dashboard</a>
+          <a href="Tables.html" class="block text-white py-2">Tables</a>
+        </nav>
+      </div>
+    </aside>
+
+    <div class="flex-1 p-6">
+      <header class="flex justify-between items-center mb-6">
+        <input type="text" id="city-input" placeholder="Enter city name" class="border p-2 rounded w-1/2">
+        <button id="get-weather" class="bg-gray-900 text-white px-4 mx-4 py-2 rounded-lg">Get Weather</button>
+        <div id="userProfile" class="ml-auto w-10 h-10 rounded-full bg-gray-300">
+            <img class="w-10 h-10 rounded-full bg-gray-300" src="images/profile_img.jpg" alt="profile_image">
+        </div>
+    </header>
+    
+    
+
+      <div id="weather-widget" class="bg-white shadow-md p-6 rounded mt-8 mb-6">
+        <h2 id="city-name" class="text-2xl font-bold">City Name</h2>
+        <p id="description" class="text-sm text-gray-600">Weather Description</p>
+        <p id="temperature" class="text-4xl">0°C</p>
+        <p id="humidity">Humidity: 0%</p>
+        <p id="wind-speed">Wind Speed: 0 km/h</p>
+      </div>
+      <div id="forecast-widget" class="mt-8 mb-6" style="display: none;">
+        <h2 class="text-2xl font-bold mb-4">5-Day Forecast</h2>
+        <div id="forecast-container" class="grid grid-cols-1 md:grid-cols-5 gap-4"></div>
+      </div>
+    
+      <p id="error-message" class="text-red-600 font-bold"></p>
+
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="w-full">
+          <canvas id="bar-chart" class="w-full"></canvas>
+        </div>
+        <div class="w-full">
+          <canvas id="doughnut-chart" class="w-full"></canvas>
+        </div>
+        <div class="w-full">
+          <canvas id="line-chart" class="w-full"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="bg-gray-400 py-8 border-t border-gray-300">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center border-b border-black-500 pb-8">
+        <div class="flex space-x-4">
+          
+            <a href="http://www.instagram.com" target="_blank" class="social-link w-inline-block"><div class="contact-icon-svg w-embed"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.6367 19C22.6367 21.0085 21.0085 22.6367 19 22.6367C16.9915 22.6367 15.3633 21.0085 15.3633 19C15.3633 16.9915 16.9915 15.3633 19 15.3633C21.0085 15.3633 22.6367 16.9915 22.6367 19Z" fill="#0D0C22"></path>
+            <path d="M27.5062 12.5655C27.3313 12.0918 27.0524 11.663 26.69 11.311C26.3381 10.9486 25.9096 10.6697 25.4356 10.4949C25.0511 10.3456 24.4736 10.1679 23.4099 10.1194C22.2592 10.067 21.9142 10.0557 19.0012 10.0557C16.0878 10.0557 15.7428 10.0667 14.5924 10.1192C13.5287 10.1679 12.9509 10.3456 12.5667 10.4949C12.0927 10.6697 11.6639 10.9486 11.3123 11.311C10.9499 11.663 10.671 12.0915 10.4959 12.5655C10.3466 12.9499 10.1688 13.5277 10.1204 14.5914C10.0679 15.7418 10.0566 16.0868 10.0566 19.0002C10.0566 21.9133 10.0679 22.2583 10.1204 23.4089C10.1688 24.4727 10.3466 25.0502 10.4959 25.4346C10.671 25.9086 10.9496 26.3371 11.312 26.6891C11.6639 27.0515 12.0924 27.3304 12.5665 27.5052C12.9509 27.6548 13.5287 27.8325 14.5924 27.8809C15.7428 27.9334 16.0875 27.9444 19.0009 27.9444C21.9145 27.9444 22.2595 27.9334 23.4096 27.8809C24.4733 27.8325 25.0511 27.6548 25.4356 27.5052C26.3871 27.1382 27.1391 26.3861 27.5062 25.4346C27.6555 25.0502 27.8332 24.4727 27.8819 23.4089C27.9344 22.2583 27.9454 21.9133 27.9454 19.0002C27.9454 16.0868 27.9344 15.7418 27.8819 14.5914C27.8335 13.5277 27.6558 12.9499 27.5062 12.5655ZM19.0012 24.6022C15.9069 24.6022 13.3985 22.0942 13.3985 18.9999C13.3985 15.9056 15.9069 13.3975 19.0012 13.3975C22.0952 13.3975 24.6035 15.9056 24.6035 18.9999C24.6035 22.0942 22.0952 24.6022 19.0012 24.6022ZM24.825 14.4853C24.102 14.4853 23.5157 13.8991 23.5157 13.176C23.5157 12.453 24.102 11.8668 24.825 11.8668C25.5481 11.8668 26.1343 12.453 26.1343 13.176C26.134 13.8991 25.5481 14.4853 24.825 14.4853Z" fill="#0D0C22"></path>
+            <path d="M19 0C8.50819 0 0 8.50819 0 19C0 29.4918 8.50819 38 19 38C29.4918 38 38 29.4918 38 19C38 8.50819 29.4918 0 19 0ZM29.8443 23.4981C29.7916 24.6595 29.6069 25.4524 29.3373 26.1465C28.7705 27.612 27.612 28.7705 26.1465 29.3373C25.4527 29.6069 24.6595 29.7913 23.4984 29.8443C22.3349 29.8974 21.9632 29.9102 19.0003 29.9102C16.037 29.9102 15.6657 29.8974 14.5019 29.8443C13.3408 29.7913 12.5476 29.6069 11.8538 29.3373C11.1256 29.0633 10.4663 28.6339 9.92125 28.0788C9.36635 27.534 8.93698 26.8744 8.66301 26.1465C8.39339 25.4527 8.20871 24.6595 8.15594 23.4984C8.10231 22.3346 8.08984 21.963 8.08984 19C8.08984 16.037 8.10231 15.6654 8.15565 14.5019C8.20842 13.3405 8.39281 12.5476 8.66243 11.8535C8.9364 11.1256 9.36606 10.466 9.92125 9.92125C10.466 9.36606 11.1256 8.93669 11.8535 8.66272C12.5476 8.3931 13.3405 8.20871 14.5019 8.15565C15.6654 8.1026 16.037 8.08984 19 8.08984C21.963 8.08984 22.3346 8.1026 23.4981 8.15594C24.6595 8.20871 25.4524 8.3931 26.1465 8.66243C26.8744 8.9364 27.534 9.36606 28.079 9.92125C28.6339 10.4663 29.0636 11.1256 29.3373 11.8535C29.6072 12.5476 29.7916 13.3405 29.8446 14.5019C29.8977 15.6654 29.9102 16.037 29.9102 19C29.9102 21.963 29.8977 22.3346 29.8443 23.4981Z" fill="#0D0C22"></path>
+            </svg></div></a>
+            <a href="https://www.facebook.com/azghan.ahmad.71?mibextid=ZbWKwL" target="_blank" class="social-link w-inline-block"><div class="contact-icon-svg w-embed"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.0645 37.7524C21.9062 37.7782 21.7473 37.802 21.5879 37.8238C21.7473 37.802 21.9062 37.7782 22.0645 37.7524Z" fill="#0D0C22"></path>
+            <path d="M22.4438 37.6875C22.3681 37.7014 22.2925 37.7142 22.2168 37.7272C22.2925 37.7142 22.3681 37.7014 22.4438 37.6875Z" fill="#0D0C22"></path>
+            <path d="M21.1622 37.877C20.9769 37.8978 20.7905 37.9164 20.6035 37.932C20.7905 37.9164 20.9769 37.8978 21.1622 37.877Z" fill="#0D0C22"></path>
+            <path d="M21.5276 37.832C21.4386 37.8439 21.3491 37.8549 21.2598 37.8654C21.3491 37.8549 21.4386 37.8439 21.5276 37.832Z" fill="#0D0C22"></path>
+            <path d="M22.9604 37.585C22.8937 37.5992 22.8267 37.6134 22.7598 37.627C22.8267 37.6134 22.8937 37.5992 22.9604 37.585Z" fill="#0D0C22"></path>
+            <path d="M24.2458 37.2661C24.1918 37.2815 24.1379 37.296 24.084 37.3111C24.1379 37.296 24.1918 37.2815 24.2458 37.2661Z" fill="#0D0C22"></path>
+            <path d="M23.856 37.3721C23.7974 37.3874 23.7385 37.4031 23.6797 37.4179C23.7385 37.4031 23.7974 37.3877 23.856 37.3721Z" fill="#0D0C22"></path>
+            <path d="M23.3494 37.499C23.2874 37.5135 23.2247 37.5271 23.1621 37.5411C23.2247 37.5271 23.2874 37.5135 23.3494 37.499Z" fill="#0D0C22"></path>
+            <path d="M20.5972 37.9326C20.4972 37.941 20.3972 37.9486 20.2969 37.9552C20.3972 37.9486 20.4972 37.941 20.5972 37.9326Z" fill="#0D0C22"></path>
+            <path d="M38 19C38 8.50819 29.4918 0 19 0C8.50819 0 0 8.50819 0 19C0 29.4918 8.50819 38 19 38C19.1116 38 19.2227 37.9977 19.334 37.9957V23.205H15.252V18.4477H19.334V14.947C19.334 10.887 21.8125 8.67722 25.4341 8.67722C27.1684 8.67722 28.6592 8.80652 29.0938 8.86421V13.1074H26.5964C24.6261 13.1074 24.2446 14.0439 24.2446 15.4178V18.4477H28.9557L28.3417 23.205H24.2446V37.2659C32.1863 34.9892 38 27.6726 38 19Z" fill="#0D0C22"></path>
+            <path d="M20.2556 37.9575C20.0579 37.9703 19.8593 37.9804 19.6602 37.9871C19.8593 37.9804 20.0579 37.9703 20.2556 37.9575Z" fill="#0D0C22"></path>
+            <path d="M19.6494 37.9878C19.5445 37.9913 19.4392 37.9939 19.334 37.9956C19.4392 37.9939 19.5445 37.9913 19.6494 37.9878Z" fill="#0D0C22"></path>
+            </svg></div></a>
+            <a href="http://www.linkedin.com/in/azghan-ahmad-7bb871249" target="_blank" class="social-link w-inline-block"><div class="contact-icon-svg w-embed"><svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 0C8.50819 0 0 8.50819 0 19C0 29.4918 8.50819 38 19 38C29.4918 38 38 29.4918 38 19C38 8.50819 29.4918 0 19 0ZM13.4788 28.7227H8.85146V14.8011H13.4788V28.7227ZM11.1653 12.9001H11.1351C9.58234 12.9001 8.57806 11.8312 8.57806 10.4953C8.57806 9.1292 9.61307 8.08984 11.196 8.08984C12.779 8.08984 13.7531 9.1292 13.7832 10.4953C13.7832 11.8312 12.779 12.9001 11.1653 12.9001ZM30.1641 28.7227H25.5373V21.275C25.5373 19.4033 24.8673 18.1268 23.1931 18.1268C21.9148 18.1268 21.1535 18.9878 20.8189 19.819C20.6966 20.1165 20.6667 20.5322 20.6667 20.9482V28.7227H16.0397C16.0397 28.7227 16.1003 16.1072 16.0397 14.8011H20.6667V16.7723C21.2816 15.8237 22.3819 14.4744 24.8369 14.4744C27.8813 14.4744 30.1641 16.4641 30.1641 20.7401V28.7227Z" fill="#0D0C22"></path>
+            </svg></div></a>
+           
+
+        </div>
+  
+       
+        <div class="text-center">
+          <h2 class="text-lg font-semibold text-gray-900">Weather App</h2>
+          <p class="text-sm text-gray-700">App having the world into it.</p>
+        </div>
+      </div>
+      <div class="mt-8 text-center text-gray-700 text-sm">
+        <p>&copy; 2024 Weather App | Made by <b><i>Azghan Ahmad</i></b> </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="javascript/Dashboard.js"></script>
+
+</body>
+</html>
