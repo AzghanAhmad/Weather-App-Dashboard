@@ -25,10 +25,10 @@ table.html: The HTML structure for displaying the weather data table.
 
 **How to Run**
 1- Clone the repository:
-git clone https://github.com/yourusername/weather-app.git
+git clone https://github.com/AzghanAhmad/Weather-App-Dashboard.git
 
 2-Navigate to the project directory:
-cd weather-app
+cd Weather-App-Dashboard
 
 Open Dashboard.html in a web browser.
 
@@ -39,3 +39,5 @@ Fetch Weather: Enter a city name in the input field and click the "Get Weather" 
 Interact with Chatbot: Type in weather-related queries in the chatbot input field and click "Send Chat" to receive responses.
 View Weather Data: The dashboard will display the weather data in a paginated format, allowing users to navigate through multiple pages of forecast information.
 
+**Github Repository Link**
+https://github.com/AzghanAhmad/Weather-App-Dashboard.git
